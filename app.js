@@ -22,12 +22,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
-app.use('/createGame', require('./routes/create-gamer'));
-app.use('/createGame', require('./routes/create-gamer'));
-app.use('/startGame', require('./routes/start-game'));
-app.use('/startGame', require('./routes/partial-change-gamer'));//api cambio parcial con patch
+app.use('/', require('./controllers/index'));
+app.use('/users', require('./controllers/users'));
+app.use('/createGame', require('./controllers/create-gamer'));
+
+app.use('/startGame', require('./controllers/start-game'));
+app.use('/startGame', require('./controllers/partial-change-gamer'));//api cambio parcial con patch
+app.use('/startGame', require('./controllers/get-data'));
+app.use('/game', require('./controllers/get-winner'));
 
 
 // catch 404 and forward to error handler

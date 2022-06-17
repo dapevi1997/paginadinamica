@@ -6,7 +6,15 @@ const eventb = () => {
     const name2 = document.getElementById('name2').value;
     const name3 = document.getElementById('name3').value;
     console.log(name1)
-    const data = {gamer: [name1, name2, name3] };
+    const data = {
+        
+        "gamer": [
+            "dan",
+            "adf"
+        ],
+        "gamers":[{"nameGamer":name1,"idGamer":"l"},{"nameGamer":name2,"idGamer":"j"},{"nameGamer":name3,"idGamer":"o"}]
+      
+    }
 
 
     fetch('http://localhost:3000/createGame', {

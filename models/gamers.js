@@ -17,7 +17,9 @@ const gamerSchema = new Schema({
     },
     igGamer: {
         type: mongoose.Types.ObjectId
-    }
+    },
+
+    gamers: [{nameGamer: String, idGamer: String}]
 
 
 

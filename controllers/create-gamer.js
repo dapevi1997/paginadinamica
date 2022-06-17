@@ -12,6 +12,7 @@ router.post('', function (req, res, next) {
 
     const gamer = new Gamer({
       gamer: req.body.gamer,
+      gamers: req.body.gamers,
       idd: "ffff-ggg-hh"
     });
     
