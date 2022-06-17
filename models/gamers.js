@@ -7,7 +7,10 @@ const gamerSchema = new Schema({
         trim: true,
         required:[true, 'id requerido']
     },
-    gamers: [{nameGamer: {type:String, trim: true,required:[true, 'Los nombres son requeridos']}, idGamer: String}]
+    gamers: [{nameGamer: {type:String, trim: true,required:[true, 'Los nombres son requeridos']}, idGamer: String}],
+    inProgress: {type:Boolean, default: true},
+    winner:{idGamer: {type:String,default:"id"}, nameGamer: {type:String,default:"name"}}
+
 });
 
 module.exports = Gamer = mongoose.model('Gamer', gamerSchema);

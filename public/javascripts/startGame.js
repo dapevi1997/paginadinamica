@@ -7,6 +7,7 @@ const name1 = document.getElementById('name1');
 const name2 = document.getElementById('name2');
 const name3 = document.getElementById('name3');
 const diceLabel = document.getElementById('diceResult');
+const lblNoWinner = document.getElementById('lblNoWinner');
 
 
 var id1 = 0;
@@ -16,6 +17,9 @@ var bet1 = 0;
 var bet2 = 0;
 var bet3 = 0;
 var diceResult = 0;
+var name1aux = "";
+var name2aux = "";
+var name3aux = "";
 
 const initDice = () => {
     fetch('http://localhost:3000/dice/init', {
@@ -34,7 +38,7 @@ const fillDiceLabel = () => {
         .then(data => {
 
             diceLabel.innerText = data;
-        
+
 
         })
 };
@@ -48,9 +52,9 @@ const fillData = () => {
     fetch('http://localhost:3000/startGame/data')
         .then(res => res.json())
         .then(data => {
-            const name1aux = data[0].gamers[0].nameGamer;
-            const name2aux = data[0].gamers[1].nameGamer;
-            const name3aux = data[0].gamers[2].nameGamer;
+             name1aux = data[0].gamers[0].nameGamer;
+             name2aux = data[0].gamers[1].nameGamer;
+             name3aux = data[0].gamers[2].nameGamer;
             label1.innerText = "Apuesta de " + name1aux;
             label2.innerText = "Apuesta de " + name2aux;
             label3.innerText = "Apuesta de " + name3aux;
@@ -124,24 +128,39 @@ const dice = () => {
 
 };
 
-const eventbtnDice = async() => {
+const eventbtnDice = async () => {
 
     diceResult = dice();
     console.log(diceResult);
-    
+
 
     await fetch(`http://localhost:3000/dice/${diceResult}`, {
         method: 'PATCH'
 
     })
-    
+
     if (diceResult === bet1) {
+        await fetch(`http://localhost:3000/winner/${id1}/${name1aux}`, {
+            method: 'PATCH'
+
+        })
         console.log(id1);
     } else if (diceResult === bet2) {
+        await fetch(`http://localhost:3000/winner/${id2}/${name2aux}`, {
+            method: 'PATCH'
+
+        })
         console.log(id2);
-    } else if (diceResult === bet3){
+    } else if (diceResult === bet3) {
+        await fetch(`http://localhost:3000/winner/${id3}/${name3aux}`, {
+            method: 'PATCH'
+
+        })
         console.log(id3);
-    } else{
+    } else {
+        alert('Nadie gana, vuelva a lanzar el dado');
+        lblNoWinner.innerText = "Nadie gana, vuelva a lanzar el dado";
+
         console.log('pc');
     }
 

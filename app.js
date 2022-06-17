@@ -32,6 +32,7 @@ app.use('/startGame', require('./controllers/get-data'));
 app.use('/game', require('./controllers/get-winner'));
 app.use('/game', require('./controllers/delete-data'));
 app.use('/dice', require('./controllers/dice-result'));
+app.use('/winner', require('./controllers/patch-winner'));
 
 
 // catch 404 and forward to error handler
