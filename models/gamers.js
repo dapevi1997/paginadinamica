@@ -3,27 +3,11 @@ const Schema = mongoose.Schema;
 const mongooseSoftDelete = require('mongoose-delete');
 
 const gamerSchema = new Schema({
-    idd :{type: String,
+    idGame :{type: String,
         trim: true,
         required:[true, 'id requerido']
     },
-
-    gamer: {
-        type:[{
-            type: String,
-            trim: true,
-            required:[true, 'El nombre del jugador es requerido']
-        }]
-    },
-    igGamer: {
-        type: mongoose.Types.ObjectId
-    },
-
-    gamers: [{nameGamer: String, idGamer: String}]
-
-
-
-
+    gamers: [{nameGamer: {type:String, trim: true,required:[true, 'Los nombres son requeridos']}, idGamer: String}]
 });
 
 module.exports = Gamer = mongoose.model('Gamer', gamerSchema);

@@ -3,22 +3,25 @@ const router = express.Router();
 
 const Gamer = require('../models/gamers');
 
-router.get('/', function(req, res, next) {
-    res.render('createGame');
-  });
+router.get('/', function (req, res, next) {
+  res.render('createGame', { title: 'Juego de dados' });
+});
 
 /* GET users listing. */
-router.post('', function (req, res, next) {
-
-    const gamer = new Gamer({
-      gamer: req.body.gamer,
+router.post('', async (req, res, next) => {
+  try {
+    const data = await new Gamer({
       gamers: req.body.gamers,
-      idd: "ffff-ggg-hh"
+      idGame: "fffff-ggg-jjjjj"
     });
-    
-    gamer.save().then(result => {res.json(result)})
-    .catch(err => {res.json(err)});
-    
-    });
+    await data.save();
+    res.json({message: "Exito"});
+
+
+  } catch (e) {
+    res.json({message: "Error"});
+  }
+
+});
 
 module.exports = router;

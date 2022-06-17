@@ -6,14 +6,14 @@ const Bet = require('../models/bet');
 
 
 router.get('', function(req, res, next) {
-    res.render('startGame');
+    res.render('startGame',);
   });
 
 /* GET users listing. */
 router.post('', function (req, res, next) {
 
     const bet = new Bet({
-      idd: "ffff-ggg-hh",
+      idGame: "fffff-ggg-jjjjj",
       gamerBet: req.body.gamerBet
     });
     

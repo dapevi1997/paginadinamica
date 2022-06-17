@@ -1,8 +1,31 @@
 body {
+  
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+h1{
+  text-align: center;
+}
+
+h2{
+  text-align: center;
+  font-size: 24px;
+  padding-bottom: 20px;
+}
+
+#lblRD{
+  padding-top: 50px;
+}
+
+#diceResult{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 10px;
+  font-size: 30px;
 }

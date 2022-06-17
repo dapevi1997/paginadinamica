@@ -28,13 +28,18 @@ router.get('/:idd/winner', async (req, res, next) => {
 
 });
 
-router.get('/:idd/bets', async (req, res, next) => {
+router.get('/:idGame/bets', async (req, res, next) => {
 
-    const idd = req.params.idd;
+    const idGame = req.params.idGame;
+    try {
+        const data = await Bet.findOne({ idGame: idGame }).exec();
+        const { gamerBet } = data;
+        res.json(gamerBet);
+    } catch (error) {
 
-    const data = await Bet.findOne({ idd: idd }).exec();
-    const { gamerBet } = data;
-    res.json(gamerBet);
+    }
+
+
 
 
 });

@@ -30,6 +30,8 @@ app.use('/startGame', require('./controllers/start-game'));
 app.use('/startGame', require('./controllers/partial-change-gamer'));//api cambio parcial con patch
 app.use('/startGame', require('./controllers/get-data'));
 app.use('/game', require('./controllers/get-winner'));
+app.use('/game', require('./controllers/delete-data'));
+app.use('/dice', require('./controllers/dice-result'));
 
 
 // catch 404 and forward to error handler

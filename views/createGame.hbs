@@ -1,11 +1,26 @@
 <script defer src="javascripts/createGame.js"></script>
 
-<div id="container" class="contenedor">
-  <input type="text" name="Nombre 1 " id="name1"/>
-  <input type="text" name="Nombre 1" id = "name2"/>
-  <input type="text" name="Nombre 1" id = "name3"/>
-</div>
+<h1>Bienvenido al juego de lanzamiento de dados</h1>
+<h2>Empecemos ingresando los nombres de los tres jugadores:</h2>
 
-<p>
-    <button type="button" id ="btnCreateGame">Crear juego</button>
-</p>
+<form>
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nombre del primer jugador</label>
+    <input type="text" class="form-control" id="name1">
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nombre del segundo jugador</label>
+    <input type="text" class="form-control" id="name2" >
+  </div>
+
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Nombre del tercer jugador</label>
+    <input type="text" class="form-control" id="name3" >
+  </div>
+
+  <button type="submit" id="btnCreateGame" class="btn btn-primary">Crear juego</button>
+</form>
+
+
+

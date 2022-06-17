@@ -1,17 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const mongooseSoftDelete = require('mongoose-delete');
+
 
 const betSchema = new Schema({
-    idd :{type: String,
+    idGame :{type: String,
         trim: true,
         required:[true, 'id requerido']
     },
 
-    gamerBet: [{idGamer: String, bet: Number}]
-
-
-
+    gamerBet: [{idGamer: String, bet: {type:Number,trim:true,required:[true,'Las apuestas son requeridas']}}]
 
 
 });
