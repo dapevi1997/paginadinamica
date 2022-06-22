@@ -1,8 +1,18 @@
+/**
+ * Importación del módulo express.
+ */
 const express = require('express');
+/**
+ * Llamado y guardado de la función router de express.
+ */
 const router = express.Router();
-
+/**
+ * Importación del esquema Dice para manipular datos del dado.
+ */
 const Dice = require('../models/dice');
-
+/**
+ * API GET para obtener el valor actual del dado en la base de datos.
+ */
 router.get('/result', async (req, res, next) => {
 
   const data = await Dice.findOne({ iGame: 'fffff-ggg-jjjjj' }).exec();
@@ -11,7 +21,9 @@ router.get('/result', async (req, res, next) => {
 
 
 });
-
+/**
+ * API POST para guardar información del dato para luego ser modificada.
+ */
 router.post('/init', function (req, res, next) {
 
   const dice = new Dice({
@@ -25,7 +37,9 @@ router.post('/init', function (req, res, next) {
   
   });
 
-
+/**
+ * API PATCH para modificar el resultado del dado lanzado en la base de datos. 
+ */
 router.patch('/:Result', function (req, res, next) {
 
   const Result = req.params.Result;

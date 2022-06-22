@@ -23,15 +23,11 @@ router.delete('/gamers/:idGame', async (req, res, next) => {
         const idGame = req.params.idGame;
         await Gamer.findOneAndDelete({ idGame: idGame });
 
-   
-
-      
-       res.json({ message: "Exito"});
-
+        res.json({ message: "Exito" });
 
     } catch (error) {
         res.json({ message: "Error" });
-       
+
     }
 
 });
@@ -43,15 +39,15 @@ router.delete('/bets/:idGame', async (req, res, next) => {
         const idGame = req.params.idGame;
         await Bet.findOneAndDelete({ idGame: idGame });
         res.json({ message: "Exito" });
-       
-      
+
+
     } catch (error) {
         res.json({ message: "Error" });
-        
+
     }
 
 });
 /**
- * Permite el uso del presente módulo.
+ * Permite la exportación del presente módulo.
  */
 module.exports = router;

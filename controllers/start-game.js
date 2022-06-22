@@ -9,7 +9,9 @@ router.get('', function(req, res, next) {
     res.render('startGame',{title: 'Juego de dados'});
   });
 
-/* GET users listing. */
+/**
+ * API POST para guardar las apuestas de los jugadores.
+ */
 router.post('', function (req, res, next) {
 
     const bet = new Bet({
