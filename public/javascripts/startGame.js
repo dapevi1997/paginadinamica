@@ -195,6 +195,10 @@ const eventbtnDice = async (e) => {
             method: 'PATCH'
 
         });
+        await fetch(`http://localhost:3000/game/fffff-ggg-jjjjj/false`, {
+            method: 'PATCH'
+    
+        });
          btnDice.disabled = true;
          window.location.href = "http://localhost:3000/game/fffff-ggg-jjjjj/winner";
          console.log(id1);
@@ -202,6 +206,10 @@ const eventbtnDice = async (e) => {
         await fetch(`http://localhost:3000/winner/${id2}/${name2aux}`, {
             method: 'PATCH'
 
+        });
+        await fetch(`http://localhost:3000/game/fffff-ggg-jjjjj/false`, {
+            method: 'PATCH'
+    
         });
          btnDice.disabled = true;
          window.location.href = "http://localhost:3000/game/fffff-ggg-jjjjj/winner";
@@ -211,6 +219,11 @@ const eventbtnDice = async (e) => {
             method: 'PATCH'
 
         });
+        await fetch(`http://localhost:3000/game/fffff-ggg-jjjjj/false`, {
+            method: 'PATCH'
+    
+        });
+
          btnDice.disabled = true;
          window.location.href = "http://localhost:3000/game/fffff-ggg-jjjjj/winner";
          console.log(id3);

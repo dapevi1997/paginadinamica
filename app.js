@@ -31,6 +31,7 @@ app.use('/startGame', require('./controllers/partial-change-gamer'));//api cambi
 app.use('/startGame', require('./controllers/get-data'));
 app.use('/game', require('./controllers/get-winner'));
 app.use('/game', require('./controllers/delete-data'));
+app.use('/game', require('./controllers/game-state'));
 app.use('/dice', require('./controllers/dice-result'));
 app.use('/winner', require('./controllers/patch-winner'));
 
