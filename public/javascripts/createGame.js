@@ -1,31 +1,68 @@
+/**
+ * Obtener acceso al botón crear juego del html
+ */
 const btnCreateGame = document.getElementById('btnCreateGame');
+/**
+ * Función que se ejecuta al hacer click sobre el botón Crear Juego
+ * @param {*} e parámetro para llamar a la función preventDefault y 
+ * evitar que la página se recargue antes de terminar la ejecución de 
+ * todas las funciones.
+ */
+const eventb = async (e) => {
+    e.preventDefault();
 
-const clearDbGamer = () => {
-    fetch('http://localhost:3000/game/gamers/fffff-ggg-jjjjj', {
-        method: 'DELETE'
-    })
+    await clearDbBet();
+    await clearDbGamer();
+    const message = await saveGamers();
+
+    if (message === 'Exito') {
+        console.log('Nuevo juego creado');
+        window.location.href = "http://localhost:3000/startGame";
+    } else {
+        alert('Debe ingresar nombres válidos');
+    }
+
+};
+btnCreateGame.addEventListener('click', eventb);
+/**
+ * Función para limpiar la base de datos de los jugadores.
+ */
+const clearDbGamer = async () => {
+
+    const res = await fetch('http://localhost:3000/game/gamers/fffff-ggg-jjjjj', {
+        method: 'DELETE',
+
+    });
+
+    const result = await res.json();
+
+    const { message } = result;
+    console.log(message, '(Limpieza de jugadores)');
+
+};
+/**
+ * Función para limpiar la base de datos de las apuestas.
+ */
+const clearDbBet = async () => {
+
+    const res = await fetch('http://localhost:3000/game/bets/fffff-ggg-jjjjj', {
+        method: 'DELETE',
+    });
+
+    const result = await res.json();
+
+    const { message } = result;
+
+    console.log(message, 'Limpieza de apuestas');
 
 };
 
-const clearDbBet = () => {
-    fetch('http://localhost:3000/game/bets/fffff-ggg-jjjjj', {
-        method: 'DELETE'
-    })
-
-};
-
-const startGame = () => {
-    window.location.href = "http://localhost:3000/startGame";
-
-};
-
-
-
-const eventb = async () => {
-
-    clearDbGamer();
-    clearDbBet();
-
+/**
+ * Función para guardar en base de datos los nombres de los jugardores.
+ * @returns Cadena de texto Exito o Error, dependiendo si los datos fueron o no
+ * guardados, respectivamente.
+ */
+const saveGamers = async () => {
     const name1 = document.getElementById('name1').value;
     const name2 = document.getElementById('name2').value;
     const name3 = document.getElementById('name3').value;
@@ -38,7 +75,6 @@ const eventb = async () => {
             { "nameGamer": name3, "idGamer": "e5834d8e-5195-41fc-993e-c731dbce4fab" }]
 
     }
-    console.log(name1)
 
     const res = await fetch('http://localhost:3000/createGame', {
         method: 'POST',
@@ -48,20 +84,19 @@ const eventb = async () => {
         body: JSON.stringify(data),
     });
 
-    var { message } = await res.json();
+    const result = await res.json();
 
-    console.log(message);
+    var { message } = result;
 
-    if (message === 'Error') {
-        alert('¡Debe ingresar los nombres!')
-    } else {
-        startGame();
-    }
-
-
-
-
-
+    return message;
 };
 
-btnCreateGame.addEventListener('click', eventb);
+
+
+
+
+
+
+
+
+

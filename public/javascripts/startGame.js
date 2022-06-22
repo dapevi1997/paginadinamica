@@ -1,4 +1,4 @@
-const btnStartGame = document.getElementById('btnStartGame');
+const btnSaveBets = document.getElementById('btnSaveBets');
 const btnDice = document.getElementById('btnDice');
 const label1 = document.getElementById('label1');
 const label2 = document.getElementById('label2');
@@ -13,34 +13,43 @@ const lblNoWinner = document.getElementById('lblNoWinner');
 var id1 = 0;
 var id2 = 0;
 var id3 = 0;
-var bet1 = 0;
-var bet2 = 0;
-var bet3 = 0;
+var bet1 ;
+var bet2;
+var bet3;
 var diceResult = 0;
 var name1aux = "";
 var name2aux = "";
 var name3aux = "";
 
-const initDice = () => {
-    fetch('http://localhost:3000/dice/init', {
-        method: 'POST'
+btnDice.disabled = true;
+
+const initDice = async() => {
+    try {
+        await fetch('http://localhost:3000/dice/init', {
+            method: 'POST'
+        })
+    } catch (error) {
+        
+    }
+  
+
+    await fetch(`http://localhost:3000/dice/1`, {
+        method: 'PATCH'
+
     })
+
+
 };
 
 initDice();
 
-const fillDiceLabel = () => {
+const fillDiceLabel = async() => {
 
+    const res =await fetch('http://localhost:3000/dice/result');
+    const data = await res.json();
 
-
-    fetch('http://localhost:3000/dice/result')
-        .then(res => res.json())
-        .then(data => {
-
-            diceLabel.innerText = data;
-
-
-        })
+    diceLabel.innerText = data;
+     
 };
 fillDiceLabel();
 
@@ -91,19 +100,18 @@ const getBets = async () => {
 getBets();
 
 
-const eventb = () => {
+const eventb = async() => {
     const bet1 = document.getElementById('name1').value;
     const bet2 = document.getElementById('name2').value;
     const bet3 = document.getElementById('name3').value;
 
     const data = {
 
-
         "gamerBet": [{ "idGamer": id1, "bet": bet1 }, { "idGamer": id2, "bet": bet2 }, { "idGamer": id3, "bet": bet3 }]
 
     }
 
-    fetch('http://localhost:3000/startGame', {
+    await fetch('http://localhost:3000/startGame', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -112,25 +120,41 @@ const eventb = () => {
 
 
     })
-        .then(res => res.json())
-        .then(data => console.log(data))
+        
 
     name1.disabled = true;
     name2.disabled = true;
     name3.disabled = true;
-    btnStartGame.disabled = true;
+    btnSaveBets.disabled = true;
+    btnDice.disabled = false;
 
 };
 
-const dice = () => {
-    const number = Math.floor(Math.random() * (7 - 1)) + 1;
+const dice = async() => {
+    const number =  Math.floor(Math.random() * (7 - 1)) + 1;
     return number;
 
 };
 
 const eventbtnDice = async () => {
 
-    diceResult = dice();
+    name1.disabled = true;
+    name2.disabled = true;
+    name3.disabled = true;
+    btnDice.disabled = true;
+
+    try {
+       await  getBets();
+    } catch (error) {
+        console.log('revisar getbets')
+    }
+    
+
+    console.log(bet1,bet2,bet3)
+
+    diceResult = await dice();
+
+    await fillDiceLabel();
     console.log(diceResult);
 
 
@@ -143,28 +167,34 @@ const eventbtnDice = async () => {
         await fetch(`http://localhost:3000/winner/${id1}/${name1aux}`, {
             method: 'PATCH'
 
-        })
+        });
+        btnDice.disabled = true;
+        window.location.href = "http://localhost:3000/game/fffff-ggg-jjjjj/winner";
         console.log(id1);
     } else if (diceResult === bet2) {
         await fetch(`http://localhost:3000/winner/${id2}/${name2aux}`, {
             method: 'PATCH'
 
-        })
+        });
+        btnDice.disabled = true;
+        window.location.href = "http://localhost:3000/game/fffff-ggg-jjjjj/winner";
         console.log(id2);
     } else if (diceResult === bet3) {
         await fetch(`http://localhost:3000/winner/${id3}/${name3aux}`, {
             method: 'PATCH'
 
-        })
+        });
+        btnDice.disabled = true;
+        window.location.href = "http://localhost:3000/game/fffff-ggg-jjjjj/winner";
         console.log(id3);
     } else {
         alert('Nadie gana, vuelva a lanzar el dado');
-        lblNoWinner.innerText = "Nadie gana, vuelva a lanzar el dado";
+        btnDice.disabled = false;
 
         console.log('pc');
     }
 
-    //console.log(bet1)  
+    
 
 };
 
@@ -172,5 +202,5 @@ const eventbtnDice = async () => {
 
 
 
-btnStartGame.addEventListener('click', eventb);
+btnSaveBets.addEventListener('click', eventb);
 btnDice.addEventListener('click', eventbtnDice);

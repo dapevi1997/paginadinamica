@@ -16,6 +16,7 @@ router.post('/init', function (req, res, next) {
 
   const dice = new Dice({
     idGame: "fffff-ggg-jjjjj",
+    result: 0
     
   });
   

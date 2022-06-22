@@ -29,3 +29,14 @@ h2{
   padding-top: 10px;
   font-size: 30px;
 }
+
+#btnNewGame{
+ margin-top: 20px;
+ margin-left: 50%;
+
+}
+
+#winner{
+  text-align: center;
+ }
+

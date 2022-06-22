@@ -6,7 +6,7 @@ const Bet = require('../models/bet');
 
 
 router.get('', function(req, res, next) {
-    res.render('startGame',);
+    res.render('startGame',{title: 'Juego de dados'});
   });
 
 /* GET users listing. */
