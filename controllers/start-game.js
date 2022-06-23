@@ -1,10 +1,18 @@
+/**
+ * Importación de la librería express.
+ */
 const express = require('express');
+/**
+ * Importación de la función router de express.
+ */
 const router = express.Router();
-
+/**
+ * Importación del Schema Bet para manejar la colección de apuestas.
+ */
 const Bet = require('../models/bet');
-
-
-
+/**
+ * API GET para reenderizar la página Empezar Juego.
+ */
 router.get('', function(req, res, next) {
     res.render('startGame',{title: 'Juego de dados'});
   });

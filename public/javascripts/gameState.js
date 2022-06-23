@@ -1,3 +1,6 @@
+/**
+ * Extracción de los distintos elementos de HTML para manipularlos.
+ */
 const name1Table = document.getElementById('name1');
 const name2Table = document.getElementById('name2');
 const name3Table = document.getElementById('name3');
@@ -7,15 +10,18 @@ const id3Table = document.getElementById('id3');
 const nameWinner = document.getElementById('nameWinner');
 const idWinner = document.getElementById('idWinner');
 const lblProgress = document.getElementById('lblProgress');
-
+/**
+ * Declaración de algunas variables para guardar datos traidos desde las APIS.
+ */
 var name1 = "";
 var name2 = "";
 var name3 = "";
-
 var id1 = "";
 var id2 = "";
 var id3 = "";
-
+/**
+ * Función para llenar la tabla que contiene información de los jugadores que están activos.
+ */
 const fillData = async() => {
 
     await fetch('http://localhost:3000/startGame/data')
@@ -39,9 +45,13 @@ const fillData = async() => {
         id2Table.innerText = id2;
         id3Table.innerText = id3;
 };
-
+/**
+ * Ejecución de la función fillData.
+ */
 fillData();
-
+/**
+ * Función para llenar información sobre el ganador del juego.
+ */
 const fillWinner = async() => {
     const res = await fetch('http://localhost:3000/game/fffff-ggg-jjjjj/winner/data');
     const winner = await res.json();
@@ -56,9 +66,13 @@ const fillWinner = async() => {
    
 
 };
-
+/**
+ * Ejecución de la función fillWinner.
+ */
 fillWinner();
-
+/**
+ * Función para llenar información sobre el progreso del juego.
+ */
 const fillProgress = async() => {
     const res = await fetch('http://localhost:3000/game/fffff-ggg-jjjjj/status');
     const progress = await res.json();
@@ -66,5 +80,7 @@ const fillProgress = async() => {
     lblProgress.innerText = progress;
 
 };
-
+/**
+ * Ejecución de la función fillProgress.
+ */
 fillProgress();

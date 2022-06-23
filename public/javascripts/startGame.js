@@ -26,43 +26,7 @@ var name1aux = "";
 var name2aux = "";
 var name3aux = "";
 
-
-/**
- * Función para iniciar mostara en el HTML información sobre el dado que se va a utilzar en el juego.
- */
-const init = async() => {
-    btnDice.disabled = true;
-
-    try {
-        await fetch('http://localhost:3000/dice/init', {
-            method: 'POST'
-        })
-    } catch (error) {
-        
-    }
-  
-
-    await fetch(`http://localhost:3000/dice/0`, {
-        method: 'PATCH'
-
-    })
-
-
-};
-/**
- * Inicio de la función para mostrar inforamción sobre el dado.
- */
-init();
-
-const fillDiceLabel = async() => {
-
-    const res =await fetch('http://localhost:3000/dice/result');
-    const data = await res.json();
-
-    diceLabel.innerText = data;
-     
-};
-fillDiceLabel();
+btnDice.disabled = true;
 
 /**
  * Función para llenar los labels de los inputs en el HTML para que el usuario sepa a cuál jugador
@@ -90,32 +54,6 @@ const fillData = () => {
  * Llamado de la función para llenar los labels de los inputs de las apuestas.
  */
 fillData();
-/**
- * Función para mostrar las apuestas que estén al momento en la base de datos de los jugadores.
- */
-// const getBets = async () => {
-//     try {
-//         const res = await fetch('http://localhost:3000/game/fffff-ggg-jjjjj/bets')
-//         const gamerBet = await res.json();
-
-//         bet1 = gamerBet[0].bet;
-//         bet2 = gamerBet[1].bet;
-//         bet3 = gamerBet[2].bet;
-
-//         name1.value = bet1;
-//         name2.value = bet2;
-//         name3.value = bet3;
-//     } catch (error) {
-
-//     }
-
-
-
-// };
-// /**
-//  * Llamado de la función para llenar inputs en caso de haber apuestas guardadas.
-//  */
-// getBets();
 
 /**
  * Función que se ejecuta al momento de pultar el botón Guardar Apuestas.
@@ -126,10 +64,6 @@ const eventb = async(e) => {
      bet1 = document.getElementById('name1').value;
      bet2 = document.getElementById('name2').value;
      bet3 = document.getElementById('name3').value;
-
-    // const bet1 = document.getElementById('name1').value;
-    // const bet2 = document.getElementById('name2').value;
-    // const bet3 = document.getElementById('name3').value;
 
     const data = {
         "gamerBet": [{ "idGamer": id1, "bet": bet1 }, { "idGamer": id2, "bet": bet2 }, { "idGamer": id3, "bet": bet3 }]
@@ -142,7 +76,6 @@ const eventb = async(e) => {
         },
         body: JSON.stringify(data),
 
-
     })
         
 
@@ -153,29 +86,26 @@ const eventb = async(e) => {
     btnDice.disabled = false;
 
 };
-
+/**
+ * Función para lanzar el dado.
+ * @returns Número aleatorio entre 1-6.
+ */
 const dice = async() => {
     const number =  Math.floor( Math.random() * (7 - 1)) + 1;
     return number;
 
 };
-
+/**
+ * Función que se ejecuta al momento de hacer clicl en el botón Lanzar dado.
+ * @param {*} e parámetro para llamar a la función preventDefault y 
+ * evitar que la página se recargue antes de terminar la ejecución de 
+ * todas las funciones.
+ */
 const eventbtnDice = async (e) => {
     e.preventDefault();
 
-    // name1.disabled = true;
-    // name2.disabled = true;
-    // name3.disabled = true;
     btnDice.disabled = false;
 
-    // try {
-    //    await  getBets();
-    // } catch (error) {
-    //     console.log('revisar getbets')
-    // }
-    
-
-    // console.log(bet1,bet2,bet3)
 
     diceResult = await dice();
 
@@ -183,11 +113,6 @@ const eventbtnDice = async (e) => {
     diceLabel.innerText = diceResult;
     console.log(diceResult);
 
-
-    // await fetch(`http://localhost:3000/dice/${diceResult}`, {
-    //     method: 'PATCH'
-
-    // })
     console.log(bet1,bet2,bet3)
 
     if (diceResult == bet1) {
