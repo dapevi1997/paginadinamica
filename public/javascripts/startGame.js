@@ -69,7 +69,7 @@ const eventb = async(e) => {
         "gamerBet": [{ "idGamer": id1, "bet": bet1 }, { "idGamer": id2, "bet": bet2 }, { "idGamer": id3, "bet": bet3 }]
     }
 
-    await fetch('http://localhost:3000/startGame', {
+   const res = await fetch('http://localhost:3000/startGame', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -77,7 +77,16 @@ const eventb = async(e) => {
         body: JSON.stringify(data),
 
     })
-        
+
+    const result = await res.json();
+
+    var { message } = result;
+
+    if (message == 'Error') {
+        alert('Debe ingresar apuestas válidas');
+        window.location.href = "http://localhost:3000/startGame";
+    }
+     
 
     name1.disabled = true;
     name2.disabled = true;

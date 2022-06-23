@@ -20,16 +20,20 @@ router.get('', function(req, res, next) {
 /**
  * API POST para guardar las apuestas de los jugadores.
  */
-router.post('', function (req, res, next) {
-
-    const bet = new Bet({
+ router.post('', async (req, res, next) => {
+  try {
+    const data = await new Bet({
       idGame: "fffff-ggg-jjjjj",
       gamerBet: req.body.gamerBet
     });
-    
-    bet.save().then(result => {res.json(result)})
-    .catch(err => {res.json(err)});
-    
-    });
+    await data.save();
+    res.json({ message: "Exito" });
+
+
+  } catch (e) {
+    res.json({ message: "Error" });
+  }
+  
+  });
 
 module.exports = router;

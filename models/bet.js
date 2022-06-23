@@ -16,7 +16,7 @@ const betSchema = new Schema({
         required:[true, 'id requerido']
     },
 
-    gamerBet: [{idGamer: String, bet: {type:Number,trim:true,required:[true,'Las apuestas son requeridas']}}]
+    gamerBet: [{idGamer: String, bet: {type:Number,trim:true,required:[true,'Las apuestas son requeridas'], min:1, max:6}}]
 
 
 });
