@@ -7,16 +7,17 @@
     
         {
             "name": "Launch via NPM",
+            "restart": true,
             "request": "launch",
             "runtimeArgs": [
-                "run-script",
+                "run",
                 "debug"
             ],
             "runtimeExecutable": "npm",
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "type": "node"
+            "type": "pwa-node"
         }
     ]
 }

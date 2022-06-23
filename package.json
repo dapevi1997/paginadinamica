@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "debug": "SET DEBUG=paginadinamica:* & npx nodemon --inspect ./bin/www"
+    "debug": "set DEBUG=paginadinamica:*  SCOPE=development & nodemon --inspect ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

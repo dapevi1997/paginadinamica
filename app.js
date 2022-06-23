@@ -25,6 +25,7 @@ const mongoose = require('mongoose');
 /**
  * Conectando a la base de datos local.
  */
+
 const mongodb = 'mongodb://localhost/gamers';
 mongoose.connect(mongodb, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MondoDB conectada'))
